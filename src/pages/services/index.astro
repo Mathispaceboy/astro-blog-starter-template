@@ -1,0 +1,4 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro'; import CTA from '../../components/CTA.astro'; import {services} from '../../data/site';
+---
+<SiteLayout title="B2B Growth Services | Bringleads" description="Focused growth services spanning export lead generation, outbound, SEO, website conversion and fractional growth."><section class="page-hero"><div class="container"><p class="eyebrow">Services</p><h1>Build the next part of your growth system.</h1><p class="lede">Start with the constraint—not a channel. We combine strategy and execution around the commercial result that matters now.</p></div></section><section class="section"><div class="container grid grid-2">{services.map((s,i)=><a class="card card-link" href={`/services/${s.slug}`}><span class="card-index">0{i+1}</span><p class="eyebrow">{s.kicker}</p><h3>{s.title}</h3><p>{s.summary}</p></a>)}</div></section><CTA/></SiteLayout>

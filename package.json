@@ -1,6 +1,6 @@
 {
-	"name": "astro-blog-starter-template",
-	"description": "Build a personal website, blog, or portfolio with Astro.",
+	"name": "bringleads-website",
+	"description": "Bringleads B2B growth consultancy website.",
 	"cloudflare": {
 		"label": "Astro Framework Starter",
 		"products": [

@@ -1,50 +1,13 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import SiteLayout from '../layouts/SiteLayout.astro'; import CTA from '../components/CTA.astro'; import {services,industries} from '../data/site';
 ---
-
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<SiteLayout title="Bringleads | Predictable B2B Growth Systems" description="Bringleads helps manufacturers, exporters and B2B companies turn expertise into a predictable pipeline.">
+<section class="hero"><div class="container"><p class="eyebrow">B2B growth consultancy · Coimbatore, India</p><h1>Turn your expertise into a <em>predictable</em> B2B pipeline.</h1><div class="hero-bottom"><p class="lede">We connect positioning, visibility, outbound and conversion into one practical growth system—built for complex B2B buying journeys.</p><div class="button-row"><a class="button" href="/contact">Book a growth call ↗</a><a class="button button-ghost" href="/start-here">Find your starting point</a></div></div></div><div class="hero-orbit" aria-hidden="true"><span>Clarity</span><span>Visibility</span><span>Conversations</span><span>Pipeline</span></div></section>
+<section class="section-sm dark"><div class="container stat-grid"><div class="stat"><strong>01</strong><span>Clear market & buyer focus</span></div><div class="stat"><strong>02</strong><span>Useful, credible visibility</span></div><div class="stat"><strong>03</strong><span>Relevant sales conversations</span></div><div class="stat"><strong>04</strong><span>A pipeline your team can run</span></div></div></section>
+<section class="section"><div class="container"><p class="eyebrow">Who we help</p><h2>Built for B2B companies with strong capability and uneven demand.</h2><div class="grid grid-2 audiences"><div class="card"><span class="pill">Manufacturers</span><h3>Make technical depth easier to discover and trust.</h3></div><div class="card"><span class="pill">Exporters</span><h3>Create a consistent path into priority international markets.</h3></div><div class="card"><span class="pill">B2B SaaS</span><h3>Sharpen positioning and connect channels around the right accounts.</h3></div><div class="card"><span class="pill">Professional services</span><h3>Turn expertise and relationships into a repeatable growth motion.</h3></div></div></div></section>
+<section class="section cream"><div class="container"><div class="section-head"><div><p class="eyebrow">Growth, connected</p><h2>Five ways to remove the next constraint.</h2></div><a href="/services">Explore all services ↗</a></div><div class="grid service-grid">{services.map((s,i)=><a class="card card-link" href={`/services/${s.slug}`}><span class="card-index">0{i+1}</span><p class="eyebrow">{s.kicker}</p><h3>{s.title}</h3><p>{s.summary}</p><span class="arrow">↗</span></a>)}</div></div></section>
+<section class="section dark"><div class="container"><p class="eyebrow">The operating system</p><h2>From scattered activity to a learning growth engine.</h2><div class="system"><div><span>01</span><h3>Clarity</h3><p>Choose the buyer, market, problem and commercial story.</p></div><div><span>02</span><h3>Visibility</h3><p>Earn attention where buyers research and build confidence.</p></div><div><span>03</span><h3>Conversations</h3><p>Create relevant outreach and low-friction paths to engage.</p></div><div><span>04</span><h3>Pipeline</h3><p>Install follow-up, measurement and a rhythm of improvement.</p></div></div></div></section>
+<section class="section"><div class="container"><p class="eyebrow">Industry context matters</p><h2>No generic playbooks. Start with how your buyers decide.</h2><div class="industry-list">{industries.map((x,i)=><a href={`/industries/${x.slug}`}><span>0{i+1}</span><strong>{x.title}</strong><small>{x.summary}</small><b>↗</b></a>)}</div></div></section>
+<CTA/>
+</SiteLayout>
+<style>.hero{position:relative;overflow:hidden;padding:120px 0 90px;background:radial-gradient(circle at 90% 10%,#dfff8466,transparent 25%),var(--paper)}.hero h1 em{color:var(--green);font-style:normal}.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:50px;margin-top:45px}.hero-orbit{display:flex;gap:8px;justify-content:center;margin:70px auto -20px;transform:rotate(-2deg)}.hero-orbit span{padding:10px 18px;border:1px solid var(--line);border-radius:99px;background:white;color:var(--green);font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em}.audiences{margin-top:45px}.audiences .card{min-height:220px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between}.audiences h3{font-size:1.9rem;max-width:450px}.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:45px}.section-head>a{font-weight:700}.service-grid{grid-template-columns:repeat(6,1fr)}.service-grid .card{grid-column:span 2;position:relative;min-height:330px}.service-grid .card:nth-child(4),.service-grid .card:nth-child(5){grid-column:span 3}.arrow{position:absolute;right:25px;bottom:20px;font-size:1.5rem}.system{display:grid;grid-template-columns:repeat(4,1fr);margin-top:55px;border-top:1px solid #315046}.system>div{padding:32px 24px;border-right:1px solid #315046}.system>div:last-child{border:0}.system span{color:var(--lime);font-size:.8rem}.system h3{margin:35px 0 15px;font-size:1.8rem}.industry-list{margin-top:45px;border-top:1px solid var(--line)}.industry-list a{display:grid;grid-template-columns:70px 1fr 2fr 30px;align-items:center;gap:20px;padding:24px 4px;border-bottom:1px solid var(--line);text-decoration:none}.industry-list a:hover strong{color:var(--green)}.industry-list span{color:var(--orange);font-size:.8rem}.industry-list strong{font-size:1.4rem}.industry-list small{color:var(--muted);font-size:.9rem}@media(max-width:800px){.hero{padding:75px 0 50px}.hero-bottom,.section-head{align-items:flex-start;flex-direction:column}.hero-orbit{justify-content:flex-start;overflow:auto}.service-grid{grid-template-columns:1fr}.service-grid .card,.service-grid .card:nth-child(4),.service-grid .card:nth-child(5){grid-column:auto}.system{grid-template-columns:1fr 1fr}.industry-list a{grid-template-columns:40px 1fr 20px}.industry-list small{display:none}}@media(max-width:500px){.system{grid-template-columns:1fr}.system>div{border-right:0;border-bottom:1px solid #315046}}</style>
