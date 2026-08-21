@@ -20,10 +20,11 @@ const { title, description, image = '/og-default.svg' } = Astro.props;
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
 
-<meta name="theme-color" content="#0f5c46" />
-<!-- Font preloads -->
-<link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />
-<link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin />
+<meta name="theme-color" content="#14242E" />
+<!-- Brand fonts: Space Grotesk (headings), IBM Plex Mono (eyebrows/labels), Inter (body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
