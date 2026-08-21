@@ -1,4 +1,4 @@
----
+—————————————————---
 title: "A Simple Competitor Research Process for B2B Manufacturers and Exporters"
 description: "A repeatable, no-tools-required process for understanding where a business actually stands against its real competitors — done properly in an afternoon."
 pubDate: "2026-08-21"
