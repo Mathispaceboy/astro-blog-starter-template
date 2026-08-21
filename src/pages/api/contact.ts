@@ -86,11 +86,13 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
 		return new Response(JSON.stringify({ ok: true }), { status: 200, headers: { 'Content-Type': 'application/json' } });
 	} catch (err) {
-		console.error('Failed to send contact email', err);
+		const debugMessage = err instanceof Error ? `${err.name}: ${err.message}` : String(err);
+		console.error('Failed to send contact email:', debugMessage);
 		return new Response(
 			JSON.stringify({
 				ok: false,
 				error: 'Something went wrong sending your message. Please email hello@bringleads.in directly.',
+				debug: debugMessage,
 			}),
 			{ status: 500, headers: { 'Content-Type': 'application/json' } }
 		);
