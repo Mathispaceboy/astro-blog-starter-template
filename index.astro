@@ -1,4 +1,0 @@
----
-import SiteLayout from '../../layouts/SiteLayout.astro'; import CTA from '../../components/CTA.astro'; import {industries} from '../../data/site';
----
-<SiteLayout title="Industries | Bringleads" description="B2B growth systems grounded in complex buying journeys and industry context."><section class="page-hero"><div class="container"><p class="eyebrow">Industries</p><h1>Growth systems grounded in buyer context.</h1><p class="lede">Complex B2B markets reward relevance, credibility and patient follow-up. We begin with the realities of your category.</p></div></section><section class="section"><div class="container grid grid-2">{industries.map((x,i)=><a class="card card-link" href={`/industries/${x.slug}`}><span class="card-index">0{i+1}</span><h3>{x.title}</h3><p>{x.summary}</p></a>)}</div></section><CTA/></SiteLayout>
