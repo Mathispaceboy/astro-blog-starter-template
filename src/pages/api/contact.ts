@@ -1,11 +1,37 @@
 import type { APIRoute } from 'astro';
 import { EmailMessage } from 'cloudflare:email';
-import { createMimeMessage } from 'mimetext';
 
 export const prerender = false;
 
 const DESTINATION = 'hello@bringleads.in';
 const SENDER = 'contact-form@bringleads.in';
+
+function encodeHeader(value: string): string {
+	// RFC 2047 encode header values that contain non-ASCII characters.
+	if (/^[\x20-\x7e]*$/.test(value)) return value;
+	const b64 = btoa(unescape(encodeURIComponent(value)));
+	return `=?UTF-8?B?${b64}?=`;
+}
+
+function buildRawEmail(opts: {
+	from: string;
+	fromName: string;
+	to: string;
+	subject: string;
+	replyTo: string;
+	body: string;
+}): string {
+	const headers = [
+		`From: ${encodeHeader(opts.fromName)} <${opts.from}>`,
+		`To: ${opts.to}`,
+		`Subject: ${encodeHeader(opts.subject)}`,
+		`Reply-To: ${opts.replyTo}`,
+		`MIME-Version: 1.0`,
+		`Content-Type: text/plain; charset="UTF-8"`,
+		`Content-Transfer-Encoding: 8bit`,
+	];
+	return `${headers.join('\r\n')}\r\n\r\n${opts.body.replace(/\r?\n/g, '\r\n')}`;
+}
 
 export const POST: APIRoute = async ({ request, locals }) => {
 	let data: Record<string, string>;
@@ -46,14 +72,16 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
 	try {
 		const env = (locals as any).runtime.env;
-		const msg = createMimeMessage();
-		msg.setSender({ name: 'Bringleads contact form', addr: SENDER });
-		msg.setRecipient(DESTINATION);
-		msg.setSubject(`Growth enquiry from ${company}`);
-		msg.setHeader('Reply-To', email);
-		msg.addMessage({ contentType: 'text/plain', data: lines });
+		const raw = buildRawEmail({
+			from: SENDER,
+			fromName: 'Bringleads contact form',
+			to: DESTINATION,
+			subject: `Growth enquiry from ${company}`,
+			replyTo: email,
+			body: lines,
+		});
 
-		const message = new EmailMessage(SENDER, DESTINATION, msg.asRaw());
+		const message = new EmailMessage(SENDER, DESTINATION, raw);
 		await env.CONTACT_EMAIL.send(message);
 
 		return new Response(JSON.stringify({ ok: true }), { status: 200, headers: { 'Content-Type': 'application/json' } });
