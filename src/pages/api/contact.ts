@@ -3,7 +3,11 @@ import { EmailMessage } from 'cloudflare:email';
 
 export const prerender = false;
 
-const DESTINATION = 'hello@bringleads.in';
+// Cloudflare's send_email binding requires the destination to be a verified
+// destination address, not a routing-rule alias — so this must match the
+// verified address configured as CONTACT_EMAIL's destination_address in
+// wrangler.json (hello@bringleads.in forwards to this via Email Routing).
+const DESTINATION = 'mathispaceboy@gmail.com';
 const SENDER = 'contact-form@bringleads.in';
 
 function encodeHeader(value: string): string {
@@ -92,7 +96,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
 			JSON.stringify({
 				ok: false,
 				error: 'Something went wrong sending your message. Please email hello@bringleads.in directly.',
-				debug: debugMessage,
 			}),
 			{ status: 500, headers: { 'Content-Type': 'application/json' } }
 		);
